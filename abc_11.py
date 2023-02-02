@@ -18,7 +18,7 @@ class D_MART(ABC):
             total=self.item_quantity*self.item_price
             self.item_price=total+total*7/100
             return self.item_price
-        else:
+        elif self.item_name=="stationary":
             total=self.item_quantity*self.item_price
             self.item_price=total+total*4/100
             return self.item_price
@@ -67,6 +67,8 @@ class CHAPPALS(D_MART):
         print(f"number of items {self.item_quantity}")
         print(f"total price of items including with gst 7% : {self.item_price}")
 
+
+
 class PAYMENT:
     status:bool=False
     type:str=" "
@@ -75,8 +77,8 @@ class PAYMENT:
         status=False
         if type=="UPI" or type=="CREDIT_CARD" or type=="DEBIT_CARD" or type=="CASH" :
             self.status=True
-            print(f"transaction done through {type}")
             print("transaction successful")
+            print(f"transaction done through {type}")
             return self.status
         else:
             print("transaction canceled")
@@ -84,20 +86,27 @@ class PAYMENT:
 
 if __name__=="__main__":
     payment=PAYMENT()
-    ord=GROCERY("grocery",5,120)
-    ord.total_price()
-    ord.display()
-    ord=STATIONARY("stationary",6,12)
-    ord.total_price()
-    ord.display()
-    ord=CHAPPALS("chappals",2,540)
-    ord.total_price()
-    ord.display()
-    ord=CLOTHS("cloths",6,2345)
-    ord.total_price()
-    ord.display()
+    gro=GROCERY("grocery",5,120)
+    gro.total_price()
+    gro.display()
+    sta=STATIONARY("stationary",6,12)
+    sta.total_price()
+    sta.display()
+    cha=CHAPPALS("chappals",2,540)
+    cha.total_price()
+    cha.display()
+    clo=CLOTHS("cloths",6,2345)
+    clo.total_price()
+    clo.display()
+
 
     payment.payment_type("CREDIT_CARD")
+    def total():
+        total=gro.item_price+sta.item_price+cha.item_price+clo.item_price
+        print(f"total amount paid for the purchased items : {total}")
+
+    t=total()
+
     if(payment.status):
         print("your Order has been placed")
 
